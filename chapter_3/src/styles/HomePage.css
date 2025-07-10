@@ -1,0 +1,30 @@
+
+.home-page {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    flex : 1;
+    flex-direction: column;
+    background-color: #0f0f0f;
+    padding: 10px 10px  ;
+    padding-top: 100px;
+    
+}
+.video-grid {
+  display: flex;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
+  
+  
+}
+.page.notExpand {
+  width: 1242px;
+} 
+.cpage.isExpand {
+  width: 1412px;
+}
+@media (max-width: 1412px) {
+  
+}
+

@@ -1,0 +1,147 @@
+.sidebar {
+  width: 240px;
+  background-color: #0f0f0f;
+  height: calc(90vh);
+  position : relative;
+  top: 0;
+  left: 0; 
+  padding-top: 10px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  display: grid;
+  margin-top: 50px;
+}
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #666;
+  border-radius: 4px;
+}
+.sidebar::-webkit-scrollbar-thumb:hover{
+  background-color: #959393;
+  border-radius: 4px;
+}
+.sidebar.open:hover {
+  overflow-y: auto;
+}
+.sidebar.open {
+  width: 240px;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+  
+}
+.sidebar_item {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-radius: 10px;
+  height: 40px;
+  width: 220px;
+}
+
+.sidebar_item:hover {
+  background-color: #333;
+  font-weight: bold;
+}
+
+.sidebar_item img {
+  width: 24px;
+  height: 24px;
+  padding-left: 15px;
+  padding-right: 20px;
+}
+
+.sidebar_item span {
+  font-size: 14px;
+  color: #ffffff;
+  
+}
+
+.me_sidebar {
+  padding-left: 15px;
+  padding-right: 0px;
+  color: white;
+  font-weight: bold;
+}
+
+.title_sidebar {
+  padding-left: 23px;
+  padding-right: 0px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.ava_sidebar {
+  width: 24px;
+  height: 24px;
+  padding-left: 15px;
+  padding-right: 20px;
+  border-radius: 50%;  /* Bo tròn hoàn toàn */
+  object-fit: cover;
+}
+hr {
+    border: none;
+    height: 1px;
+    background-color: #333;
+    
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.footer-links {
+    color: #aaa;
+    font-size: 13px;
+    padding-left: 15px;
+    margin-left: 10px;
+    padding-bottom: 30px;
+
+}
+
+.footer-links a {
+    color: #aaa;
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+.sidebar_item_collapse {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-radius: 10px;
+  height: 70px;
+  width: 70px;
+  margin-right: 5px;
+}
+.sidebar_item_collapse img{
+  width: 24px;
+  height: 24px;
+  padding-left: 20px;
+  padding-right: 18px;
+}
+.sidebar_item_collapse span{
+  display: flex;
+  font-size: 10px;
+  color: #ffffff;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.sidebar_item_collapse:hover {
+  background-color: #333;
+  font-weight: bold;
+}

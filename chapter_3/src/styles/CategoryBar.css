@@ -1,0 +1,87 @@
+.category-bar-wrapper { 
+  display: flex;
+  align-items: center;
+  background-color: rgba(15, 15, 15, 0.9);
+  background: linear-gradient(to right, rgb(15,15,15,0.9) 95%, rgba(255, 255, 255, 0) 5%);
+  padding: 10px 10px;
+  width: 100%;
+  z-index: 990;
+  margin-top: 50px;
+}
+
+.category-bar-wrapper.notExpand {
+  width: 100%;
+}
+.category-bar-wrapper.isExpand {
+  width: 100%;
+}
+.category-bar {
+  display: flex;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  padding: 0 5px;    
+  gap: 10px;
+  scrollbar-width: none;
+  width: 10;
+  margin-right: 30px;
+  flex: 1;
+  min-width: 0;
+  overflow-x: hidden;
+  
+}
+
+.category-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.category {
+  background-color: #272727;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  cursor: pointer;
+  font-weight: bold;
+}
+.category-native {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.scroll-btn {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 999;
+  margin-right: 15px;
+}
+.scroll-btn:hover {
+  background-color: #817f7f;
+}
+
+.scroll-btn.left {
+  left: 4px;
+}
+
+.scroll-btn.right {
+  right: 4px;
+}
+.scroll-btn.left img {
+  width: 20px;
+  height: 20px;
+}
+.scroll-btn.right img {
+  width: 20px;
+  height: 20px;
+}
