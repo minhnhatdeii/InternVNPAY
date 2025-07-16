@@ -4,7 +4,7 @@ export const  getYoutubeHomeData = async() => {
     const options = {
     method: 'GET',
     headers: {
-        'x-rapidapi-key': 'c18da195b0mshcdebcf46df53015p1a1b64jsn33955d1b96fc',
+        'x-rapidapi-key': 'ad8baa10b4mshd96b0fb517abff1p1a66e2jsnb1942009d697',
         'x-rapidapi-host': 'yt-api.p.rapidapi.com',
     },
     };
@@ -44,7 +44,6 @@ export const  getYoutubeHomeData = async() => {
         });
 
 
-        console.log("Danh sách video:", videoItems);
         return simpleList;
     } catch (error) {
         console.error("Lỗi khi gọi API:", error);

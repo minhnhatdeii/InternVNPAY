@@ -1,15 +1,11 @@
 import "../styles/SideBar.css"
 
 
-function SideBar ({isOpen, isExpand, isHiden, setOpen}){
+function SideBar ({isOpen}){
     
-    if (isHiden === false) {
-        if (!isExpand) {
-            setOpen(false);
-        }
     return (
-        <div className={`sidebar ${isExpand ? (isOpen ? ("open") : ("collapsed")) : ("collapsed")}`}>
-            {isOpen ? (
+        <div className={`sidebar ${(isOpen ? ("open") : ("collapsed"))}`}>
+            {isOpen ? ( 
                 <div className="sidebar.open">
                     <div className="sidebar_item">
                     <img src="/assets/images/2_trangchu.png" alt="Home" />
@@ -179,6 +175,6 @@ function SideBar ({isOpen, isExpand, isHiden, setOpen}){
             )}
         </div>
     );
-    }
+    
 }
 export default SideBar;

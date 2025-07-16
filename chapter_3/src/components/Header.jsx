@@ -1,6 +1,9 @@
 import "../styles/Header.css"
+import { useNavigate } from "react-router-dom";
 
-function Header({toggleSideBar, onNavigate , currentScreen}) {
+function Header({toggleSideBar}) {
+    const navigate = useNavigate();
+
     return (
         <header className="header">
             {/* Left section */}
@@ -8,7 +11,7 @@ function Header({toggleSideBar, onNavigate , currentScreen}) {
                 <button className="menu_button" onClick={toggleSideBar}>
                     <img className="menu_img" src="/assets/images/1_menu.png" alt="image"></img>
                 </button>
-                <button className="logo_icon" onClick={currentScreen != "HomePage" ? () => onNavigate("HomePage") : undefined}>
+                <button className="logo_icon" onClick={() => navigate("/")}>
                     <img className="logo_img" src="/assets/images/1_youtube_logo.png" alt="image"></img>
                     <div className="title_header">
                         <h1 className="title">YouTube</h1>

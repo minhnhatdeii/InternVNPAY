@@ -13,12 +13,9 @@ function CategoryBar({isExpand}) {
     if (!el) return;
     setShowLeft(el.scrollLeft > 0);
     setShowRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
-    console.log(el.scrollLeft, el.clientWidth, el.scrollWidth - 1); 
   };
 
   useEffect(() => {
-    console.log(showLeft, showRight); 
-    console.log(scrollRef.current);
     checkScroll();
     const el = scrollRef.current;
     if (el) {

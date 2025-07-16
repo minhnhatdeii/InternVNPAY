@@ -1,0 +1,66 @@
+.comment {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-header {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.username {
+  font-weight: 600;
+  color: white;
+  margin-right: 10px;
+}
+
+.comment-content p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.translate {
+  font-size: 13px;
+  color: #3ea6ff;
+  cursor: pointer;
+}
+
+.comment-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.reply {
+  font-size: 13px;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.btn-action-comment {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.btn-action-comment img {
+  width: 16px;
+  height: 16px;
+}

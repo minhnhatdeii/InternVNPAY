@@ -14,7 +14,6 @@
 .sidebar::-webkit-scrollbar {
   width: 6px;
 }
-
 .sidebar::-webkit-scrollbar-track {
   background: #1e1e1e;
 }
@@ -29,6 +28,18 @@
 }
 .sidebar.open:hover {
   overflow-y: auto;
+}
+@media (max-width: 790px) {
+  .sidebar {
+    position: absolute;
+    width: 0px;
+    z-index: 1010;
+    width: 70px;
+  }
+  .sidebar.collapsed {
+    display: none;
+  }
+  
 }
 .sidebar.open {
   width: 240px;

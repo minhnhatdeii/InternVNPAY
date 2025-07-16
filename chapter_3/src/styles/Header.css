@@ -11,6 +11,7 @@
   width: 100%;
   overflow:visible;
   z-index: 1000;
+  padding-top: 3px;
   
 
 }
@@ -74,6 +75,8 @@
   justify-content: center;
   height: 50px;
   padding-top: 10px;
+  width: 100%;
+  min-width: 40px;
 }
 .search_container {
   display: flex;
@@ -81,46 +84,57 @@
   background-color: #181818;
   border: 1px solid #333;
   border-radius: 999px;
-  width: 580px;
+  width: 100%;
   height: 40px;
   font-size: 20px;
   padding-left: 15px;
   max-width: 600px;
+  justify-content: space-between;
   
 }
-@media (max-width: 1024px) {
-  .search_container {
-    max-width: 300px;
+@media (max-width: 1000px) {
+  
+  .keyboard_button {
+  display: none;
+  }
+  .icon_search {
+    width: 30%;
+    justify-content: flex-end;
+  }
+  .search_button {
+    width: 100%;
   }
 }
-@media (max-width: 870px) {
+@media (max-width: 660px) {
+  
   .search_container {
-    max-width: 100px;
-    border: none;
-    background-color: #151515;
-    padding: 0px;
-  }
-  .header{
-    justify-content: left;
-  }
-  .left_section{
-    margin-right: 80px;
+    max-width: 40px;
+  align-items: baseline;
+  justify-content:left;
+  width: 100%;
+  padding-right: 0px;
+  border: none; 
+  background-color: #0f0f0f;
   }
   .icon_search {
     max-width: 40px;
   }
   .icon_search button{
     border-radius: 50%;
-  }
+    width: 40px;
+    height: 40px;
+    padding: 1px 1px;
+}
   .search_container input {
     display: none;
   }
-  .keyboard_button {
-  display: none;
-  }
-  
 }
 
+@media (max-width: 660px) {
+  .micro_btn {
+    display: none;
+  }
+}
 @media (max-width: 560px) {
   .header{
     justify-content: left;
@@ -133,29 +147,15 @@
   align-items: baseline;
   justify-content:left;
   padding-right: 0px;
+  width: 100%;
+  padding-right: 10px;
+  
 }
 .right_section{
   margin-left: 0px;
 }
-.icon_search {
-  max-width: 40px;
-}
-.icon_search button{
-    border-radius: 50%;
-}
-  .search_container input {
-    display: none;
-  }
-  .keyboard_button {
-  display: none;
-  }
-  .search_button {
-  border-radius: 10px;
-  width: 4px;
-  }
-  .micro_btn{
-    display: none;
-  }
+
+
 }
 @media (max-width: 490px) {
   .search_container {
@@ -173,6 +173,7 @@
   border: none;
   color: white;
   outline: none;
+  width: 100%;
   
 }
 
@@ -187,6 +188,7 @@
   cursor: pointer;
   background-color: #181818;
   border: none;
+  justify-content: right;
 }
 
 .search_button {
@@ -197,6 +199,7 @@
   color: white;
   cursor: pointer;
   width: 80px;
+  justify-content: right;
   
 }
 
@@ -209,6 +212,7 @@
   width: 40px;
   height: 40px;
   padding-left: 8px;
+  margin-right: 5px;
 }
 
 .right_section {
