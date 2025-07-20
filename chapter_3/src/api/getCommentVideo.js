@@ -3,7 +3,7 @@ export const getCommentVideoData = async (videoId) => {
 const options = {
 	method: 'GET',
 	headers: {
-		'x-rapidapi-key': '89644839e0mshcae86286ffb46fcp1e2f10jsn5dacb407fc3b',
+		'x-rapidapi-key': '1ec5c83b55mshd15a7035beade6fp12f050jsn8791b1a67393',
 		'x-rapidapi-host': 'youtube-media-downloader.p.rapidapi.com'
 	}
 };
@@ -20,6 +20,7 @@ try {
         isPinned: item.isPinned,
         isHearted: item.isHearted,
         idChannel: item.channel.id,
+        handleChannel: item.channel.handle,
         imageChannel: item.channel.avatar?.[0]?.url,
         publishedTime: item.publishedTimeText,
         like: item.voteCountText,

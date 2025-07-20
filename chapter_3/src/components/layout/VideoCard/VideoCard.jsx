@@ -1,4 +1,4 @@
-import "../styles/VideoCard.css"
+import "./VideoCard.css"
 import { useNavigate } from "react-router-dom";
 
 function VideoCard({video}) {

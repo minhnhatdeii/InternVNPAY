@@ -1,5 +1,5 @@
 // src/components/VideoSuggestCard.jsx
-import "../styles/Comment.css";
+import "./Comment.css";
 
 
 export const CommentCard = ({comment}) => {
@@ -8,7 +8,7 @@ export const CommentCard = ({comment}) => {
             <img src={comment.imageChannel} className="avatar" />
             <div className="comment-content">
             <div className="comment-header">
-                <span className="username">{comment.idChannel}</span>
+                <span className="username">{comment.handleChannel}</span>
                 <span className="time">{comment.publishedTime}</span>
             </div>
             <p>{comment.text}</p>

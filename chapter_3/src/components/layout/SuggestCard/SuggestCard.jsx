@@ -1,6 +1,6 @@
 // src/components/VideoSuggestCard.jsx
 import React from "react";
-import "../styles/SuggestCard.css";
+import "./SuggestCard.css";
 import { useNavigate } from "react-router-dom";
 
 

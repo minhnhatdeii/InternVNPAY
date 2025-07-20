@@ -49,6 +49,16 @@
   width: 70px;
   
 }
+.sidebar.is-component.collapsed {
+  display: none;
+}
+.sidebar.is-component.open {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  /* Giữ nguyên width hoặc điều chỉnh nếu cần */
+}
 .sidebar_item {
   display: flex;
   align-items: center;

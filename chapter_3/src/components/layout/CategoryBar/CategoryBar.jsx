@@ -1,13 +1,19 @@
-import "../styles/CategoryBar.css"
+import "./CategoryBar.css"
 import { useRef, useState, useEffect } from "react";
-import { categories } from "../datas/categoryData";
+import { useTranslation } from 'react-i18next';
 
 function CategoryBar({isExpand}) {
+  const { t, i18n } = useTranslation();
+
   const [indexChooseCategory, setIndexChooseCategory] = useState(0);
   const scrollRef = useRef(null);
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(true);
-
+  const categories = [
+    t('all'), t('music'), t('playlists'), t('games'), t('news'),
+    t('live'), t('adventure'), t('rapping'), t('animation'), t('recently'),
+    t('watched'), t('new recommendations'),t('most popular'), t('minecraft'), t('esport')
+  ];
   const checkScroll = () => {
     const el = scrollRef.current;
     if (!el) return;

@@ -1,8 +1,13 @@
-import "../styles/Header.css"
+import "./Header.css"
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 function Header({toggleSideBar}) {
+    const { t, i18n } = useTranslation();
     const navigate = useNavigate();
+    const handleChangeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+  };
 
     return (
         <header className="header">
@@ -22,7 +27,7 @@ function Header({toggleSideBar}) {
             {/* Search section */}
             <div className="center_section">
                 <div className="search_container">
-                    <input type="input" placeholder="Tìm Kiếm"/>
+                    <input type="input" placeholder={t('search')}/>
                     <div className="icon_search">
                         <button className="keyboard_button">
                             <img className="keyboard_img" src="/assets/images/1_keyboard.png"></img>
@@ -42,15 +47,16 @@ function Header({toggleSideBar}) {
                 <button className="plus_btn"> 
                     <div className="plus_content">
                         <img className="plus_img" src="/assets/images/1_plus.png"/> 
-                        <span>Tạo</span>
+                        <span>{t('create')}</span>
                     </div>
                 </button>
-                <button className="bell_btn">
+                <button className="bell_btn" onClick={() => handleChangeLanguage('vi')}>
                 <img className="bell_img" src="/assets/images/1_notification.png" /></button>
                 <img
                     src="https://i.pravatar.cc/40"
                     alt="Avatar"
                     className="avatar"
+                    onClick={() =>handleChangeLanguage('en')}
                 />
             </div>
         </header>

@@ -4,7 +4,7 @@ const url = `https://youtube-media-downloader.p.rapidapi.com/v2/video/details?vi
 const options = {
 	method: 'GET',
 	headers: {
-		'x-rapidapi-key': '89644839e0mshcae86286ffb46fcp1e2f10jsn5dacb407fc3b',
+		'x-rapidapi-key': '1ec5c83b55mshd15a7035beade6fp12f050jsn8791b1a67393',
 		'x-rapidapi-host': 'youtube-media-downloader.p.rapidapi.com'
 	}
 };
@@ -12,7 +12,8 @@ const options = {
 try {
 	const response = await fetch(url, options);
 	const result = await response.json();
-    const viewCount = Number(result.viewCount); // đảm bảo là số
+    console.log(result)
+    const viewCount = Number(result.viewCount); 
             let formattedView = viewCount;
             if (viewCount >= 1000 && viewCount < 1000000) {
                 formattedView = `${(viewCount / 1000).toFixed(1)}K views`;
