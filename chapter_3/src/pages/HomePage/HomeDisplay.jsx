@@ -4,6 +4,7 @@ import "./HomePage.css"
 import { useDispatch, useSelector  } from "react-redux";
 import { useEffect } from "react";
 import { fetchHomePageData } from "../../store/homePageSlice";
+import LoadingScreen from "../../components/layout/Loading/LoadingScreen";
 
 const  HomeDisplay = () => {
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const  HomeDisplay = () => {
         }
       }, [videos, dispatch]);
     
-    if (loading) return <p>Đang tải video...</p>;
+    if (loading) return <p>Dang tai video</p>
     if (error) return <p>Đã xảy ra lỗi khi tải video.</p>;
     console.log(videos);
     return (

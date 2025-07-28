@@ -1,0 +1,19 @@
+.trip-display-container {
+    height: 100%;
+    background-color: #E3E1E3;
+    overflow: hidden;
+}
+.list-trip-display {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding-top: 16px;
+    gap: 16px;
+    min-height: 0;
+    max-height: 840px;
+    padding-bottom: 50px;
+    background-color: #E3E1E3;
+}

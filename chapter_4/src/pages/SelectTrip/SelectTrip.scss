@@ -1,0 +1,12 @@
+html, body, #root, .select-trip-container {
+  height: 100%;
+  margin: 0;
+}
+.select-trip-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+    overflow: hidden;
+}

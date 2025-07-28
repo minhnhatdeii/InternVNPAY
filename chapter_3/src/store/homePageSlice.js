@@ -1,16 +1,25 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {getYoutubeHomeData} from "../api/youtubeApi.js";
+import { startLoading, updateProgress, finishLoading, setError } from './progressSlice.js';
 
 
 export const fetchHomePageData = createAsyncThunk(
   'homePage/fetchHomePageData',
-  async (_, { rejectWithValue }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     try {
+      dispatch(startLoading());
+      const stepCount = 20;
+      for (let i = 1; i <= stepCount; i++) {
+        await new Promise((res) => setTimeout(res, 200));
+        dispatch(updateProgress(Math.floor((i / stepCount) * 100)));
+      }
       const videos = await getYoutubeHomeData();
+      dispatch(finishLoading());
       return {
         videos
       };
     } catch (error) {
+      dispatch(setError(error.message || 'Something went wrong'));
       return rejectWithValue(error.message || 'Something went wrong');
     }
   }

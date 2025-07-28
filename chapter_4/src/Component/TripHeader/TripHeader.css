@@ -1,0 +1,66 @@
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+.horizontal {
+  display: flex;                                    
+}
+.trip-header {
+  height: 70px;
+  z-index: 10;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background-color: white;
+  font-family: sans-serif;
+  padding-top: 60px;
+  overflow-y: hidden;
+}
+
+.trip-info {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.trip-title {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.trip-route {
+  font-size: 25px;
+  color: black;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  padding: 6px;
+  cursor: pointer;
+  align-items: center;
+  color: white;
+}
+.btn-tripheader_line {
+  border-left: 1px solid #fff;
+  margin: 0px 10px;
+  padding: 10px 0px;
+}
+
+.back-btn {
+  font-size: 20px;
+}
+
+.action-buttons {
+  display: flex;
+  background-color: #C8C5C8;
+  gap: 15px;
+  border-radius: 30px;
+  padding: 0px 20px;
+  align-items: center;
+  height: 80%;
+  line-height: 20px;
+  color: white;
+}
