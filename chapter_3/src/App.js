@@ -1,12 +1,9 @@
 import {Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import SideBar from "./components/layout/SideBar/SideBar";
 import Header from "./components/layout/Header/Header";
-import CategoryBar from "./components/layout/CategoryBar/CategoryBar";
 import "./App.css";
-import HomePage from "./pages/HomePage/HomePage";
-import WatchPage from "./pages/WatchPage/WatchPage";
+
 
 import AppRoutes from "./routes/routes";
 import { useLocation } from "react-router-dom";

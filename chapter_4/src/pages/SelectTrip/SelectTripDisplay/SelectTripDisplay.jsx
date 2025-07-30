@@ -1,402 +1,72 @@
 import CardBus from "../../../Component/CardBus/CardBus";
-import FilterTrip from "../../../Component/FilterTrip/FilterTrip";
-import './SelectTripDisplay.css'
+import DateSortTrip from "../../../Component/DateSortTrip/DateSortTrip";
+import './SelectTripDisplay.scss'
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from "react";
+import { filterTripsByDateAction, initOperatorList, setLoading, sortTripsByTypeAction } from "../../../store/reducers/tripsSlice";
+import { View } from "@vnxjs/components";
 
 
-const bus_in4 = [
-    {
-          "allow_picking_seat": false,
-          "vehicle_type": "LIMOUSINE",
-          "status": "ACTIVE",
-          "total_seat": 26,
-          "seat_type": "SLEEPER_DOUBLE",
-          "duration_in_min": 420,
-          "merchant_start_point_name": "VP Tân Bình",
-          "start_point": "79",
-          "discount_amount": 350000,
-          "refund_able": true,
-          "search_request_id": 7698705,
-          "departure_time": "10:00",
-          "vehicle_name": "Limousine 24 Phòng Đôi",
-          "uuid": "75c1b210-793d-4cab-82c1-12327425381d",
-          "merchant_id": 1,
-          "pick_up_date": "20-03-2024",
-          "drop_off_date": "20-03-2024",
-          "name": "Hồ Chí Minh - Đà Lạt (TB)",
-          "drop_off_time": "17:00",
-          "priority": 1,
-          "departure_date": "20-03-2024",
-          "merchant_end_point_name": "VP Đà Lạt 28 Trần Hưng Đạo",
-          "available_seat": 24,
-          "merchant_name": "Vé xe rẻ",
-          "fare_amount": 350000,
-          "end_location_id": 44,
-          "transport_information": {
-            "rating": 4.2,
-            "allow_view_detail": true,
-            "id": 437,
-            "code": "VEXERE_19133",
-            "image_url": "https://static.vexere.com/production/images/1695031623001.jpeg",
-            "is_favorite": false,
-            "notification": {
-              "label": "Lưu ý về đặt chỗ và mang hành lý",
-              "description": "Hai ghế đầu là ghế cạnh tài xế, không ngả ra sau được. Hành lý vui lòng không mang quá lớn"
-            },
-            "comment_number": 2042,
-            "direct_connect": false,
-            "name": "Điền Linh Limousine"
-          },
-          "end_point": "68",
-          "start_location_id": 50,
-          "merchant_trip_code": "v2CLW3CRCCjAoaAjEwIgIwMDDbxvgFOgoyMC0wMy0yMDI0SB1QJKgBvZUB",
-          "pick_up_time": "10:00",
-          "merchant_code": "VEXERE"
-        },
-        {
-          "allow_picking_seat": false,
-          "vehicle_type": "LIMOUSINE",
-          "status": "ACTIVE",
-          "total_seat": 24,
-          "seat_type": "SLEEPER_DOUBLE",
-          "duration_in_min": 420,
-          "merchant_start_point_name": "Văn phòng Bình Thạnh",
-          "start_point": "79",
-          "discount_amount": 645000,
-          "refund_able": false,
-          "search_request_id": 7698705,
-          "departure_time": "22:30",
-          "vehicle_name": "Limousine phòng đôi 24 chỗ",
-          "uuid": "700bbcdd-ac1e-4774-9bf1-5a7d3b76b9c1",
-          "merchant_id": 1,
-          "pick_up_date": "20-03-2024",
-          "drop_off_date": "21-03-2024",
-          "name": "Sài Gòn - Đà Lạt",
-          "drop_off_time": "05:30",
-          "priority": 1,
-          "departure_date": "20-03-2024",
-          "merchant_end_point_name": "VP. Đà Lạt",
-          "available_seat": 20,
-          "merchant_name": "Vé xe rẻ",
-          "fare_amount": 750000,
-          "end_location_id": 44,
-          "transport_information": {
-            "rating": 4.3,
-            "allow_view_detail": true,
-            "id": 175,
-            "code": "VEXERE_25958",
-            "image_url": "https://static.vexere.com/production/images/1682050964065.jpeg",
-            "is_favorite": false,
-            "notification": {
-              "label": "Lưu ý về đặt chỗ và mang hành lý",
-              "description": "Hai ghế đầu là ghế cạnh tài xế, không ngả ra sau được. Hành lý vui lòng không mang quá lớn"
-            },
-            "comment_number": 3595,
-            "direct_connect": false,
-            "name": "Long Vân Limousine"
-          },
-          "end_point": "68",
-          "start_location_id": 50,
-          "merchant_trip_code": "v2CNnXCRDJ4QoaAjIyIgIzMDCI0p8COgoyMC0wMy0yMDI0SB1QJGgAqAHmygE",
-          "pick_up_time": "22:30",
-          "merchant_code": "VEXERE"
-        },
-        {
-          "allow_picking_seat": false,
-          "vehicle_type": "LIMOUSINE",
-          "status": "ACTIVE",
-          "total_seat": 36,
-          "seat_type": "SLEEPER",
-          "duration_in_min": 410,
-          "merchant_start_point_name": "VP Tân Bình",
-          "start_point": "79",
-          "discount_amount": 250000,
-          "refund_able": true,
-          "search_request_id": 7698705,
-          "departure_time": "00:30",
-          "vehicle_name": "Limousine 36 giường",
-          "uuid": "abdf2f1c-a9e1-4a6e-a9ef-d0ab72b84f18",
-          "merchant_id": 1,
-          "pick_up_date": "20-03-2024",
-          "drop_off_date": "20-03-2024",
-          "name": "Hồ Chí Minh - Đà Lạt (TB-Q5)",
-          "drop_off_time": "07:20",
-          "priority": 1,
-          "departure_date": "20-03-2024",
-          "merchant_end_point_name": "VP Đà Lạt 28 Trần Hưng Đạo",
-          "available_seat": 20,
-          "merchant_name": "Vé xe rẻ",
-          "fare_amount": 250000,
-          "end_location_id": 44,
-          "transport_information": {
-            "rating": 4.2,
-            "allow_view_detail": true,
-            "id": 437,
-            "code": "VEXERE_19133",
-            "image_url": "https://static.vexere.com/production/images/1695031623001.jpeg",
-            "is_favorite": false,
-            "notification": {
-              "label": "Lưu ý về đặt chỗ và mang hành lý",
-              "description": "Hai ghế đầu là ghế cạnh tài xế, không ngả ra sau được. Hành lý vui lòng không mang quá lớn"
-            },
-            "comment_number": 2042,
-            "direct_connect": false,
-            "name": "Điền Linh Limousine"
-          },
-          "end_point": "68",
-          "start_location_id": 50,
-          "merchant_trip_code": "v2CLW3CRCCjAoaAjAwIgIzMDDJ9NoHOgoyMC0wMy0yMDI0SB1QJKgBvZUB",
-          "pick_up_time": "00:30",
-          "merchant_code": "VEXERE"
-        },
-        {
-          "allow_picking_seat": false,
-          "vehicle_type": "LIMOUSINE",
-          "status": "ACTIVE",
-          "total_seat": 11,
-          "seat_type": "NORMAL",
-          "duration_in_min": 260,
-          "merchant_start_point_name": "Vp.Sài Gòn",
-          "start_point": "79",
-          "discount_amount": 250000,
-          "refund_able": true,
-          "search_request_id": 7698705,
-          "departure_time": "08:00",
-          "vehicle_name": "Limousine 12 chỗ",
-          "uuid": "cde5c9b2-508b-45ca-9d38-310be0959b59",
-          "merchant_id": 1,
-          "pick_up_date": "20-03-2024",
-          "drop_off_date": "20-03-2024",
-          "name": "Sài Gòn - Bảo Lộc",
-          "drop_off_time": "12:20",
-          "priority": 1,
-          "departure_date": "20-03-2024",
-          "merchant_end_point_name": "Vp.Bảo Lộc",
-          "available_seat": 11,
-          "merchant_name": "Vé xe rẻ",
-          "fare_amount": 250000,
-          "end_location_id": 44,
-          "transport_information": {
-            "rating": 4.5,
-            "allow_view_detail": true,
-            "id": 215,
-            "code": "VEXERE_16413",
-            "image_url": "https://static.vexere.com/c/i/16413/xe-nhat-doan-VeXeRe-kO8OcQH-1000x600.jpeg",
-            "is_favorite": false,
-            "notification": {
-              "label": "Lưu ý về đặt chỗ và mang hành lý",
-              "description": "Hai ghế đầu là ghế cạnh tài xế, không ngả ra sau được. Hành lý vui lòng không mang quá lớn"
-            },
-            "comment_number": 380,
-            "direct_connect": false,
-            "name": "Nhật Đoan Limousine"
-          },
-          "end_point": "68",
-          "start_location_id": 50,
-          "merchant_trip_code": "v2CNGiAxDSogMaAjA4IgIwMDDw1BM6CjIwLTAzLTIwMjRIHVAkqAGdgAE",
-          "pick_up_time": "08:00",
-          "merchant_code": "VEXERE"
-        },
-        {
-          "allow_picking_seat": false,
-          "vehicle_type": "LIMOUSINE",
-          "status": "ACTIVE",
-          "total_seat": 24,
-          "seat_type": "SLEEPER_DOUBLE",
-          "duration_in_min": 420,
-          "merchant_start_point_name": "Văn phòng Bình Thạnh",
-          "start_point": "79",
-          "discount_amount": 645000,
-          "refund_able": false,
-          "search_request_id": 7698705,
-          "departure_time": "23:00",
-          "vehicle_name": "Limousine phòng đôi 24 chỗ",
-          "uuid": "9104413a-677a-4f35-973c-575e157158a9",
-          "merchant_id": 1,
-          "pick_up_date": "20-03-2024",
-          "drop_off_date": "21-03-2024",
-          "name": "Sài Gòn - Đà Lạt",
-          "drop_off_time": "06:00",
-          "priority": 1,
-          "departure_date": "20-03-2024",
-          "merchant_end_point_name": "VP. Đà Lạt",
-          "available_seat": 20,
-          "merchant_name": "Vé xe rẻ",
-          "fare_amount": 750000,
-          "end_location_id": 44,
-          "transport_information": {
-            "rating": 4.3,
-            "allow_view_detail": true,
-            "id": 175,
-            "code": "VEXERE_25958",
-            "image_url": "https://static.vexere.com/production/images/1682050964065.jpeg",
-            "is_favorite": false,
-            "notification": {
-              "label": "Lưu ý về đặt chỗ và mang hành lý",
-              "description": "Hai ghế đầu là ghế cạnh tài xế, không ngả ra sau được. Hành lý vui lòng không mang quá lớn"
-            },
-            "comment_number": 3595,
-            "direct_connect": false,
-            "name": "Long Vân Limousine"
-          },
-          "end_point": "68",
-          "start_location_id": 50,
-          "merchant_trip_code": "v2CNnXCRDJ4QoaAjIzIgIwMDCI0p8COgoyMC0wMy0yMDI0SB1QJGgAqAHmygE",
-          "pick_up_time": "23:00",
-          "merchant_code": "VEXERE"
-        },
-        {
-          "allow_picking_seat": false,
-          "vehicle_type": "NORMAL",
-          "status": "ACTIVE",
-          "total_seat": 22,
-          "seat_type": "SLEEPER",
-          "duration_in_min": 450,
-          "merchant_start_point_name": "Bến Xe An Sương",
-          "start_point": "79",
-          "discount_amount": 350000,
-          "refund_able": true,
-          "search_request_id": 7698705,
-          "departure_time": "23:45",
-          "vehicle_name": "Phòng 22 chỗ (Có Toilet)",
-          "uuid": "d8eff7c5-da3d-4b7e-be25-c7f284f4d948",
-          "merchant_id": 1,
-          "pick_up_date": "20-03-2024",
-          "drop_off_date": "21-03-2024",
-          "name": "Sài Gòn - Đà Lạt",
-          "drop_off_time": "07:15",
-          "priority": 1,
-          "departure_date": "20-03-2024",
-          "merchant_end_point_name": "Văn Phòng Đà Lạt",
-          "available_seat": 19,
-          "merchant_name": "Vé xe rẻ",
-          "fare_amount": 350000,
-          "end_location_id": 44,
-          "transport_information": {
-            "rating": 4.4,
-            "allow_view_detail": true,
-            "id": 1707,
-            "code": "VEXERE_44817",
-            "image_url": "https://static.vexere.com/production/images/1696934509137.jpeg",
-            "is_favorite": false,
-            "notification": {
-              "label": "Lưu ý về đặt chỗ và mang hành lý",
-              "description": "Hai ghế đầu là ghế cạnh tài xế, không ngả ra sau được. Hành lý vui lòng không mang quá lớn"
-            },
-            "comment_number": 396,
-            "direct_connect": false,
-            "name": "Tân Quang Dũng"
-          },
-          "end_point": "68",
-          "start_location_id": 50,
-          "merchant_trip_code": "v2CNjVChDa1QoaAjIzIgI0NTCQjsQJOgoyMC0wMy0yMDI0SB1QJKgBkd4C",
-          "pick_up_time": "23:45",
-          "merchant_code": "VEXERE"
-        },
-        {
-          "allow_picking_seat": false,
-          "vehicle_type": "LIMOUSINE",
-          "status": "ACTIVE",
-          "total_seat": 42,
-          "seat_type": "SLEEPER",
-          "duration_in_min": 420,
-          "merchant_start_point_name": "VP Tân Bình",
-          "start_point": "79",
-          "discount_amount": 250000,
-          "refund_able": true,
-          "search_request_id": 7698705,
-          "departure_time": "23:15",
-          "vehicle_name": "Limousine 36 giường",
-          "uuid": "b45e8478-7f8e-4ffb-9e6a-b46318f749e8",
-          "merchant_id": 1,
-          "pick_up_date": "20-03-2024",
-          "drop_off_date": "21-03-2024",
-          "name": "Hồ Chí Minh - Đà Lạt (TB)",
-          "drop_off_time": "06:15",
-          "priority": 1,
-          "departure_date": "20-03-2024",
-          "merchant_end_point_name": "VP Đà Lạt 28 Trần Hưng Đạo",
-          "available_seat": 24,
-          "merchant_name": "Vé xe rẻ",
-          "fare_amount": 250000,
-          "end_location_id": 44,
-          "transport_information": {
-            "rating": 4.2,
-            "allow_view_detail": true,
-            "id": 437,
-            "code": "VEXERE_19133",
-            "image_url": "https://static.vexere.com/production/images/1695031623001.jpeg",
-            "is_favorite": false,
-            "notification": {
-              "label": "Lưu ý về đặt chỗ và mang hành lý",
-              "description": "Hai ghế đầu là ghế cạnh tài xế, không ngả ra sau được. Hành lý vui lòng không mang quá lớn"
-            },
-            "comment_number": 2042,
-            "direct_connect": false,
-            "name": "Điền Linh Limousine"
-          },
-          "end_point": "68",
-          "start_location_id": 50,
-          "merchant_trip_code": "v2CLW3CRCCjAoaAjIzIgIxNTDbxvgFOgoyMC0wMy0yMDI0SB1QJKgBvZUB",
-          "pick_up_time": "23:15",
-          "merchant_code": "VEXERE"
-        },
-        {
-          "allow_picking_seat": false,
-          "vehicle_type": "LIMOUSINE",
-          "status": "ACTIVE",
-          "total_seat": 24,
-          "seat_type": "SLEEPER_DOUBLE",
-          "duration_in_min": 415,
-          "merchant_start_point_name": "Văn phòng Hoàng Văn Thụ",
-          "start_point": "79",
-          "discount_amount": 600000,
-          "refund_able": true,
-          "search_request_id": 7698705,
-          "departure_time": "05:00",
-          "vehicle_name": "Limousine phòng đôi 24 chỗ",
-          "uuid": "be07af68-27b6-45de-9a38-7678c645cab3",
-          "merchant_id": 1,
-          "pick_up_date": "20-03-2024",
-          "drop_off_date": "20-03-2024",
-          "name": "Sài Gòn - Đà Lạt (Tân Bình)",
-          "drop_off_time": "11:55",
-          "priority": 1,
-          "departure_date": "20-03-2024",
-          "merchant_end_point_name": "Khách sạn Lưu Ly",
-          "available_seat": 22,
-          "merchant_name": "Vé xe rẻ",
-          "fare_amount": 750000,
-          "end_location_id": 44,
-          "transport_information": {
-            "rating": 4.6,
-            "allow_view_detail": true,
-            "id": 185,
-            "code": "VEXERE_27278",
-            "image_url": "https://static.vexere.com/production/images/1647589923872.jpeg",
-            "is_favorite": false,
-            "notification": {
-              "label": "Lưu ý về đặt chỗ và mang hành lý",
-              "description": "Hai ghế đầu là ghế cạnh tài xế, không ngả ra sau được. Hành lý vui lòng không mang quá lớn"
-            },
-            "comment_number": 5440,
-            "direct_connect": false,
-            "name": "Phong Phú"
-          },
-          "end_point": "68",
-          "start_location_id": 50,
-          "merchant_trip_code": "v2CIrrCRCsswkaAjA1IgIwMDDm6ZYHOgoyMC0wMy0yMDI0SB1QJKgBjtUB",
-          "pick_up_time": "05:00",
-          "merchant_code": "VEXERE"
-        }
-]
-export default function SelectTripDisplay() {
+const dateList = [
+    { label: 'T6', date: '20/3' },
+    { label: 'T7', date: '21/3' },
+    { label: 'CN', date: '22/3' },
+    { label: 'T2', date: '23/4' },
+    { label: 'T3', date: '24/4' },
+    { label: 'T4', date: '25/4' },
+    { label: 'T5', date: '26/4' },
+    { label: 'T6', date: '27/4' },
+    { label: 'T7', date: '28/4' },
+    { label: 'CN', date: '29/4' },
+  ];
+  const sortTypes = ['Giờ chạy', 'Giá vé', 'Đánh giá'];
+ 
+export default function SelectTripDisplay() {  
+    const dispatch = useDispatch();
+  const selectedIndex = useSelector(state => state.dateSort.selectedIndex);
+  const activeIndexSortType = useSelector(state => state.dateSort.activeIndexSortType);
+  const iconStates = useSelector(state => state.dateSort.iconStates);
+  const currListBus = useSelector(state => state.trip.busList);
+  const loading = useSelector(state => state.trip.loading);
+
+    useEffect(() => {
+      dispatch(setLoading(true));
+      setTimeout(() => {
+        dispatch(filterTripsByDateAction({
+          dateStr: dateList[selectedIndex].date,
+          year: "2024"
+        }));
+        dispatch(initOperatorList())
+        dispatch(setLoading(false));
+
+    }, 500); 
+  }, [selectedIndex, dispatch]);
+
+    useEffect(() => {
+      console.log(activeIndexSortType, iconStates)
+      dispatch(setLoading(true));
+      setTimeout(() => {
+        dispatch(sortTripsByTypeAction({
+          typeIndex: activeIndexSortType,
+          isAsc: iconStates
+        }));
+      }, 300);
+      dispatch(setLoading(false));
+    }, [activeIndexSortType, iconStates, dispatch]);
+
+   
     return (
         <div className="trip-display-container">
-            <FilterTrip />
+            <DateSortTrip dateList={dateList} sortTypes={sortTypes}/>
             <div className="list-trip-display">
-                {bus_in4.map((item) => (
-                    <CardBus key={item.transport_information.id} bus={item}/>
-                ))}
+                {loading ? (
+                  <View className="loading">Đang tải chuyến xe...</View>
+                  
+                ) : (
+                  currListBus?.map((item) => (
+                    <CardBus key={item.uuid} bus={item} />
+                  ))
+                )}
             </div>
         </div>
     );

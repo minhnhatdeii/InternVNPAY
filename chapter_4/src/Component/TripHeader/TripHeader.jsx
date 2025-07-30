@@ -1,21 +1,26 @@
 import React from 'react';
 import './TripHeader.css';
-import ic_back from '../../assets/images/ic_back.svg';
+import { Navigator, Button } from '@vnxjs/components';
 
-function TripHeader() {
+
+function TripHeader({icon, namePage, route}) {
   return (
     <div className="trip-header">
-      <button className="icon-button back-btn">
-        <img src={ic_back} alt='back-btn'/>
-      </button>
+      <Navigator openType='navigateBack'>
+        <Button className="icon-button back-btn">
+          <img src={icon} alt='back-btn'/>
+        </Button>
+      </Navigator>
       <div className="trip-info">
-        <div className="trip-title">Chọn chuyến đi</div>
-        <div className="trip-route">Hồ Chí Minh - Lâm Đồng</div>
+        <div className="trip-title">{namePage}</div>
+        {route && <div className="trip-route">{route}</div>}
       </div>
       <div className="action-buttons">
         <button className="icon-button">⋯</button>
         <div className='btn-tripheader_line'/>
-        <button className="icon-button">✕</button>
+        <Navigator openType='navigateBack'>
+          <button className="icon-button" onClick={() => navigateBack}>✕</button>
+        </Navigator>
       </div>
     </div>
   );
