@@ -15,14 +15,12 @@ export default function FilterTripPage() {
     
     return(
         <Provider store={store}>
-            <View>
-                <div className="filter-trip-container">
-                    <TripHeader icon={ic_close} namePage={"Lọc Chuyến đi"}/>
-                    <FilterTripDisplay />
-                    <div className='selectfilter-container'>
-                        <SelectFilter/>
-                    </div>
-                </div>
+            <View className="filter-trip-container">
+                <TripHeader icon={ic_close} namePage={"Lọc Chuyến đi"}/>
+                <FilterTripDisplay />
+                <View className='selectfilter-container'>
+                    <SelectFilter/>
+                </View>
             </View>
         </Provider>
     )

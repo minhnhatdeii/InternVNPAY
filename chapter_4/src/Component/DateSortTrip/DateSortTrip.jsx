@@ -5,8 +5,9 @@ import ic_arrow_up from '../../assets/images/arrow-up.png';
 import ic_arrow_down from '../../assets/images/arrow-down.png'
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedIndex, setSortType } from '../../store/reducers/dateSortSlice';
-import { Button, Navigator } from '@vnxjs/components';
+import { Button, Navigator, View, Image, Text, CoverView } from '@vnxjs/components';
 import { setFilter } from "../../store/reducers/dateSortSlice";
+
 
 
 
@@ -20,52 +21,54 @@ export default function DateSortTrip({dateList, sortTypes}) {
 
   const handleSortButton = (index) => {
     dispatch(setSortType(index));
-    
   };
   return (
-    <div className="container">
-      <div className="date-scroll">
+    <View className="container">
+      <View className="date-scroll">
         {dateList.map((item, index) => (
-          <div
+          <View
             key={index}
             className={`day ${index === selectedIndex ? 'selected' : ''}`}
             onClick={() => {dispatch(setSelectedIndex(index)); dispatch(setFilter(false))}}
           >
-            <div className="label">{item.label}</div>
-            <div className="date">{item.date}</div>
-          </div>
+            <View className="label">{item.label}</View>
+            <View className="date">{item.date}</View>
+          </View>
         ))}
-      </div>
+      </View>
 
-      <div className="sortTypes">
-        <div>
+      <View className="sortTypes">
+        <View className='sortlist-horizontal'>
           {sortTypes.map((sortType, index) => (
-          <button
-            key={index}
-            className={`sort-btn ${sortType === sortTypes[activeIndexSortType] ? 'active' : ''}`}
-            onClick={() => handleSortButton(index)}
-          >
-            {sortType === sortTypes[activeIndexSortType] ? 
-              (<div className='horizontal'>
-                <span>{sortType}</span>
-                {
-                  iconStates ? (<img src={ic_arrow_up} alt='ic_sort_down'className='icon'/>): 
-                  (<img src={ic_arrow_down} alt='ic_sort_down'className='icon'/>)
-                }
-              </div>)
-               : <span>{sortType}</span>}
-          </button>
-        ))}
-        </div>
+            <View>
+              <View
+                key={index}
+                className={`sort-btn ${sortType === sortTypes[activeIndexSortType] ? 'active' : ''}`}
+                onClick={() => handleSortButton(index)}
+              >
+                {sortType === sortTypes[activeIndexSortType] ? (
+                  <View className='horizontal-datesort'>
+                    <Text className='text-sort-btn'>{sortType}</Text>
+                    <Image src={iconStates ? ic_arrow_up : ic_arrow_down} className='icon' alt='ic_sort_up' />             
+                  </View>
+                ) : (
+                  <View className='horizontal'>
+                    <Text className='text-sort-btn'>{sortType}</Text>
+                  </View>
+                )}
+              </View>
+            </View>
+          ))}
+        </View>
         <Navigator url="pages/FilterTripPage/FilterTripPage" openType="navigate">
-          <button className={`sort-btn ${isFilter ? 'active' : ''}`}>
-            <div className='horizontal' style={{gap:"5px"}}>
-              <span>Lọc</span>
-              <img src={ic_sort_grey} alt='ic_sort_grey'/>
-            </div>
-          </button>
+          <View className={`sort-btn ${isFilter ? 'active' : ''}`}>
+            <View className='horizontal' style={{gap:"5px"}}>
+              <Text className='text-sort-btn'>Lọc</Text>
+              <Image src={ic_sort_grey} alt='ic_sort_grey'/>
+            </View>
+          </View>
         </Navigator>
-      </div>
-    </div>
+      </View>
+    </View>
   );
 }

@@ -6,17 +6,19 @@ const initialState = {
   selectedTimes: [],
   priceRange: [0, 3000000],
   selectedOperators: [], // danh sách id nhà xe đã chọn
+  selectedTypeBus: [],
 };
 
 export const selectFilteredBusList = createSelector(
   [(state) => state.trip.busList, (state) => state.filter],
   (busList, filter) => {
-    const { selectedTimes, priceRange, selectedOperators } = filter;
+    const { selectedTimes, priceRange, selectedOperators, selectedTypeBus } = filter;
 
     return busList.filter(bus => {
       const price = bus.discount_amount;
       const id = bus.transport_information.id;
       const time = bus.departure_time;
+      const typeBus = bus.vehicle_type;
 
       // check giá
       const priceMatch = price >= priceRange[0] && price <= priceRange[1];
@@ -29,8 +31,9 @@ export const selectFilteredBusList = createSelector(
         const [start, end] = range.split(' - ');
         return time >= start && time <= end;
       });
+      const typeBusMatch = selectedTypeBus.length === 0 || selectedTypeBus.includes(typeBus);
 
-      return priceMatch && operatorMatch && timeMatch;
+      return priceMatch && operatorMatch && timeMatch && typeBusMatch;
     });
   }
 );
@@ -59,9 +62,17 @@ const filterSlice = createSlice({
         state.selectedOperators.push(id);
       }
     },
+    toggleTypeBus: (state, action) => {
+      const type = action.payload;
+      if (state.selectedTypeBus.includes(type)) {
+        state.selectedTypeBus = state.selectedTypeBus.filter(i => i !== type);
+      } else {
+        state.selectedTypeBus.push(type);
+      }
+    },
     resetFilter: () => initialState
   }
 });
 
-export const { toggleTime, setPriceRange, toggleOperator, resetFilter } = filterSlice.actions;
+export const { toggleTime, setPriceRange, toggleOperator, toggleTypeBus, resetFilter } = filterSlice.actions;
 export default filterSlice.reducer;

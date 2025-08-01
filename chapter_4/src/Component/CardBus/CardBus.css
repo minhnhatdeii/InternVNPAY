@@ -40,17 +40,79 @@
   align-items: center;
 }
 
-.arrow {
-  background: #0066cc;
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 18px;
+.arrow-line-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex: 1;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
+.dashed-line{
+  flex: 1;
+  height: 0;
+}
+.left-line {
+  border-top: 4px dotted #8d8989;
+}
+.right-line {
+  border-top: 4px dotted #0d47a1;
+}
+
+.arrow-button {
+  position: relative;
+  background-color: #0d47a1;
+  color: white;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #0d47a1;
+  border-radius: 50%;
+}
+
+.bus-card__line-container {
+  position: relative;
+  height: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .bus-card__line {
-  border-top: 1px dashed #ccc;
-  margin: 10px 0;
+  border-top: 3px dashed #ccc;
+   flex: 1;
+   position: relative;
+   margin-top: 7px;
+}
+.semi-circle {
+  width: 30px;
+  height: 30px;
+  background-color: #E3E1E3; 
+  border-radius: 50%;
+  position: absolute; 
+  top: 0;
+  z-index: 2;
+}
+
+.left {
+  left: -30px;
+}
+
+.right {
+  right: -30px;
 }
 
 .bus-card__content {
@@ -59,10 +121,10 @@
   align-items: center;
 }
 .location {
-  width: 300px;          /* hoặc bất kỳ chiều rộng bạn muốn */
-  white-space: normal;   /* Cho phép xuống dòng */
-  word-wrap: break-word; /* Ngắt từ nếu quá dài */
-  overflow-wrap: break-word; /* Tương tự, hỗ trợ thêm */
+  width: 220px;          
+  white-space: normal;   
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
 }
 .brand-info {
   display: flex;
@@ -95,14 +157,19 @@
 .rating {
   color: rgb(0, 0, 0);
   font-size: 20px;
+  margin-right: 5px;
 }
 .favourite-btn {
   background-color: #ffffff;
   border: none;
   margin-left: 4px;
-  object-fit: cover;
   justify-content: end;
-
+  object-fit: cover;
+  width: 40px;
+  height: 40px;
+}
+.favourite-btn::after{
+  border: none !important;
 }
 .rules {
   color: #0C4095;
@@ -115,6 +182,7 @@
   font-size: 20px;
   color: #000000;
   margin-top: 2px;
+  text-align: right;
 }
 
 .bus-card__footer {
@@ -129,6 +197,7 @@
   font-size: 20px;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .seats-left {
@@ -139,10 +208,23 @@
 .continue-btn {
   background-color: #F6F6FF;
   color: #0C4095;
-  border: none;
-  padding: 8px 14px;
+  padding: 8px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
   font-size: 20px;
+  width: 150px;
+}
+.continue-btn::after{
+  border: none !important;
+}
+
+.text-left {
+  text-align: left; 
+  margin-left: 10px;
+}
+
+.text-right {
+  text-align: right;
+  margin-right: 10px;
 }

@@ -3,8 +3,11 @@ import DateSortTrip from "../../../Component/DateSortTrip/DateSortTrip";
 import './SelectTripDisplay.scss'
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from "react";
-import { filterTripsByDateAction, initOperatorList, setLoading, sortTripsByTypeAction } from "../../../store/reducers/tripsSlice";
+import { filterTripsByDateAction, initOperatorList, setLoading, sortTripsByTypeAction, initTypeBusList } from "../../../store/reducers/tripsSlice";
 import { View } from "@vnxjs/components";
+import debounce from 'lodash.debounce';
+import {useMemo, useRef} from 'react';
+
 
 
 const dateList = [
@@ -22,52 +25,83 @@ const dateList = [
   const sortTypes = ['Giờ chạy', 'Giá vé', 'Đánh giá'];
  
 export default function SelectTripDisplay() {  
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const selectedIndex = useSelector(state => state.dateSort.selectedIndex);
   const activeIndexSortType = useSelector(state => state.dateSort.activeIndexSortType);
   const iconStates = useSelector(state => state.dateSort.iconStates);
   const currListBus = useSelector(state => state.trip.busList);
   const loading = useSelector(state => state.trip.loading);
+  const scrollRef = useRef(null);
+  const [visibleList, setVisibleList] = useState([]);
+  const [page, setPage] = useState(1);
+  const pageSize = 20;
 
+  const debouncedDispatch = debounce((dispatch, dateStr) => {
+    dispatch(setLoading(true));
+    dispatch(filterTripsByDateAction({ dateStr, year: '2024' }));
+    dispatch(initOperatorList());
+    dispatch(initTypeBusList());
+    dispatch(setLoading(false));
+  }, 800);
     useEffect(() => {
-      dispatch(setLoading(true));
-      setTimeout(() => {
-        dispatch(filterTripsByDateAction({
-          dateStr: dateList[selectedIndex].date,
-          year: "2024"
-        }));
-        dispatch(initOperatorList())
-        dispatch(setLoading(false));
-
-    }, 500); 
+      const dateStr = dateList[selectedIndex].date;
+      debouncedDispatch(dispatch, dateStr);
+       return () => {
+        debouncedDispatch.cancel();
+      };
   }, [selectedIndex, dispatch]);
 
+  const debouncedSort = useMemo(() => debounce((typeIndex, isAsc) => {
+    dispatch(setLoading(true));
+    dispatch(sortTripsByTypeAction({ typeIndex, isAsc }));
+    dispatch(setLoading(false));
+  }, 100), [dispatch]);
+
     useEffect(() => {
-      console.log(activeIndexSortType, iconStates)
-      dispatch(setLoading(true));
-      setTimeout(() => {
-        dispatch(sortTripsByTypeAction({
-          typeIndex: activeIndexSortType,
-          isAsc: iconStates
-        }));
-      }, 300);
-      dispatch(setLoading(false));
+      console.log(activeIndexSortType, iconStates);
+      debouncedSort(activeIndexSortType, iconStates);
+      if (scrollRef.current) {
+      scrollRef.current.scrollTop = 0; 
+    }
+      return () => debouncedSort.cancel();
     }, [activeIndexSortType, iconStates, dispatch]);
+
+    useEffect(() => {
+      if (currListBus.length > 0) {
+        setVisibleList(currListBus.slice(0, pageSize));
+        setPage(1);
+      }
+    }, [currListBus]);
+    const handleScroll = () => {
+      const el = scrollRef.current;
+      if (!el || loading) return;
+
+      const scrollThreshold = 50; // ngưỡng còn lại để load thêm
+
+      if (el.scrollTop + el.clientHeight >= el.scrollHeight - scrollThreshold) {
+        const nextPage = page + 1;
+        const nextItems = currListBus.slice(0, nextPage * pageSize);
+
+        if (nextItems.length > visibleList.length) {
+          setVisibleList(nextItems);
+          setPage(nextPage);
+        }
+      }
+    };
 
    
     return (
-        <div className="trip-display-container">
+        <View className="trip-display-container" >
             <DateSortTrip dateList={dateList} sortTypes={sortTypes}/>
-            <div className="list-trip-display">
+            <View className="list-trip-display" ref={scrollRef} onScroll={handleScroll}>
                 {loading ? (
                   <View className="loading">Đang tải chuyến xe...</View>
-                  
                 ) : (
-                  currListBus?.map((item) => (
+                  visibleList.map((item) => (
                     <CardBus key={item.uuid} bus={item} />
                   ))
                 )}
-            </div>
-        </div>
+            </View>
+        </View>
     );
 };

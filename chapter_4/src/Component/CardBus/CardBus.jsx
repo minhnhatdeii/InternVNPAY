@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './CardBus.css';
 import ic_heart from '../../assets/images/ic_heart.svg';
 import ic_heart_selected from '../../assets/images/ic_heart_selected.svg';
+import { Button, Navigator, View, Image, Text } from '@vnxjs/components';
 
 const CardBus = ({bus}) => {
   const [isHeart, setHeart] = useState(false);
@@ -22,51 +23,71 @@ const CardBus = ({bus}) => {
 
   return `${hours} giờ ${minutes} phút`;
 }
+function convertTypeBus(name) {
+    if (name === "LIMOUSINE") return "Limousine";
+    if (name === "NORMAL") return "Ghế ngồi";
+    if (name === "SLEEPER") return "Giường nằm";
+  }
   return (
-    <div className="bus-card">
-      <div className="bus-card__header">
-        <span className="time">{`${bus.departure_time} ${bus.departure_date}`}</span>
-        <span className="duration">{`${timeDiff(bus.departure_time, bus.drop_off_time)}`}</span>
-      </div>
+    <View className="bus-card">
+      <View className="bus-card__header">
+        <Text className="time">{`${bus.departure_time} ${bus.departure_date}`}</Text>
+        <Text className="duration">{`${timeDiff(bus.departure_time, bus.drop_off_time)}`}</Text>
+      </View>
 
-      <div className="bus-card__route">
-        <span className="location">{bus.merchant_start_point_name}</span>
-        <span className="arrow">→</span>
-        <span className="location">{bus.merchant_end_point_name}</span>
-      </div>
-      <div className="bus-card__content">
-        <div className='brand-info'>
-            <div className='horizontal'>
-              <img src={bus.transport_information.image_url} alt="Bus" className="bus-card__image" />
-              <div className='vertical'>
-                  <span className="brand">{bus.transport_information.name}</span>
-                  <span className="rules">Chi tiết quy định</span>
-              </div>
-            </div>
-            <div className='vertical'>
-              <div className='horizontal'>
-                <span className="rating">{`⭐ ${bus.transport_information.rating}`}</span>
-                <button className='favourite-btn' onClick={() => setHeart(!isHeart)}>
-                  {!isHeart ? (<img src={ic_heart} alt="heart" />)
-                  : (<img src={ic_heart_selected} alt="heart" />)
-                }
-                </button>
-              </div>
-              <span className="type">{bus.vehicle_type}</span>
-            </div>
-        </div>
-      </div>
-      <div className="bus-card__line"></div>
+      <View className="bus-card__route">
+        <Text className="location text-right">{bus.merchant_start_point_name}</Text>
+        <View className="arrow-line-container">
+          <View className="dot" />
+          <View className="dashed-line left-line" />
 
-      <div className="bus-card__footer">
-        <div className="price">
-          <span>Từ <strong style={{color:"#0C4095"}}>{bus.discount_amount.toLocaleString('en-US')} đ</strong></span>
-          <span className="seats-left">Chỉ còn {bus.available_seat} chỗ trống</span>
-        </div>
-        <button className="continue-btn">Tiếp tục</button>
-      </div>
-    </div>
-    
+          <View className="arrow-button">
+            →
+          </View>
+
+          <View className="dashed-line right-line" />
+          <View className="dot" />
+        </View>
+        <Text className="location text-left">{bus.merchant_end_point_name}</Text>
+      </View>
+      <View className="bus-card__content">
+        <View className='brand-info'>
+          <View className='horizontal'>
+            <Image src={bus.transport_information.image_url} alt="Bus" className="bus-card__image"/>
+            <View className='vertical'>
+                <Text className="brand">{bus.transport_information.name}</Text>
+                <Text className="rules">Chi tiết quy định</Text>
+            </View>
+          </View>
+          <View className='vertical'>
+            <View className='horizontal'>
+              <Text className="rating">{`⭐ ${bus.transport_information.rating}`}</Text>
+              {/* <Button className='favourite-btn' onClick={() => setHeart(!isHeart)}> */}
+                {!isHeart ? (<Image src={ic_heart} alt="heart" onClick={() => setHeart(!isHeart)}/>)
+                : (<Image src={ic_heart_selected} alt="heart" onClick={() => setHeart(!isHeart)}/>)
+              }
+              {/* </Button> */}
+            </View>
+            <Text className="type">{convertTypeBus(bus.vehicle_type)}</Text>
+          </View>
+        </View>
+      </View>
+
+      <View className='bus-card__line-container'>
+         <View class="semi-circle left"></View>
+         <View className="bus-card__line"></View>
+         <View class="semi-circle right"></View>
+      </View>
+     
+
+      <View className="bus-card__footer">
+        <View className="price">
+          <Text>Từ <strong style={{color:"#0C4095"}}>{bus.discount_amount.toLocaleString('en-US')} đ</strong></Text>
+          <Text className="seats-left">Chỉ còn {bus.available_seat} chỗ trống</Text>
+        </View>
+        <Button className="continue-btn">Tiếp tục</Button>
+      </View>
+    </View>
   );
 };
 

@@ -43,6 +43,9 @@
   align-items: center;
   color: white;
 }
+.icon-button::after {
+  display: none !important;
+}
 .btn-tripheader_line {
   border-left: 1px solid #fff;
   margin: 0px 10px;

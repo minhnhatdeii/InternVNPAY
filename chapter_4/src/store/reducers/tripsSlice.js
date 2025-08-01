@@ -19,7 +19,18 @@ function removeDuplicateBusById(busList) {
       uniqueMap.set(id, bus);
     }
   }
+  return Array.from(uniqueMap.values());
+}
+function removeDuplicateTypeBusByName(busList) {
+  const uniqueMap = new Map();
 
+  for (const bus of busList) {
+    const type = bus.vehicle_type;
+    if (!uniqueMap.has(type)) {
+      uniqueMap.set(type, bus);
+    }
+  }
+ 
   return Array.from(uniqueMap.values());
 }
 
@@ -57,8 +68,9 @@ function sortTrips(trips, typeIndex, isAscending) {
 }
 
 const initialState = {
-  busList: [...listBus],
+  busList: [],
   operatorList: [],
+  typeBusList: [],
   loading: false,
 };
 
@@ -71,6 +83,10 @@ const tripsSlice = createSlice({
     const clone = [...listBus];
         state.operatorList = removeDuplicateBusById(clone);
     },
+    initTypeBusList(state) {
+    const clone = [...listBus];
+        state.typeBusList = removeDuplicateTypeBusByName(clone);
+    },
     setLoading(state, action) {
       state.loading = action.payload;
     },
@@ -78,7 +94,8 @@ const tripsSlice = createSlice({
         const { dateStr, year } = action.payload;
         const clonedList = [...listBus];
         const filtered = filterTripsByDate(clonedList, dateStr, year);
-        state.busList = filtered; // lọc trực tiếp từ busList hiện tại
+        const sorted = sortTrips(filtered, 0, true);
+        state.busList = sorted; // lọc trực tiếp từ busList hiện tại
     },
     sortTripsByTypeAction(state, action) {
         const { typeIndex, isAsc } = action.payload;
@@ -99,5 +116,5 @@ export const {
   filterTripsByDateAction,
   sortTripsByTypeAction, 
   setBusList,initOperatorList,
-resetBusList} = tripsSlice.actions;
+resetBusList, initTypeBusList} = tripsSlice.actions;
 export default tripsSlice.reducer;
