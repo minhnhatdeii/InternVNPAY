@@ -10,7 +10,7 @@ export default function SelectTrip() {
     return (
         <Provider store={store}>
             <View className="select-trip-container">
-                <TripHeader icon={ic_back} namePage={"Chọn Chuyến đi"} route={"Hồ Chí Minh - Đà Lạt"}/>
+                <TripHeader icon={ic_back} namePage={"Chọn Chuyến đi"} route={"Hồ Chí Minh - Lâm Đồng"}/>
                 <View>
                     <SelectTripDisplay/>
                 </View>

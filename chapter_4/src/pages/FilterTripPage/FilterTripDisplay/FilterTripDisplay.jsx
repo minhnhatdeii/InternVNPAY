@@ -35,6 +35,7 @@ export default function FilterTripDisplay() {
     if (name === "SLEEPER") return "Giường nằm";
   }
   
+  
   return (
     <View className="filter-panel">
       <View className="section">
@@ -64,8 +65,9 @@ export default function FilterTripDisplay() {
               step={step}
               max={3000000}
               min={0}
-              onChange={(val) => dispatch(setPriceRange(val))}
-              minDistance={1000}
+              onChange={(val) => (setPriceRange(val))}
+              onAfterChange={(val) => dispatch(setPriceRange(val))}
+              minDistance={step}
           />
           <View className="value-text">
             <Text>{priceRange[0].toLocaleString('en-US')} đ</Text>

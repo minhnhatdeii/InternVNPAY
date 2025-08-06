@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import './CardBus.css';
 import ic_heart from '../../assets/images/ic_heart.svg';
 import ic_heart_selected from '../../assets/images/ic_heart_selected.svg';
-import { Button, Navigator, View, Image, Text } from '@vnxjs/components';
+import arrow_route from '../../assets/images/arrow2.png';
+import star from '../../assets/images/star.png';
+
+import { Button, View, Image, Text } from '@vnxjs/components';
 
 const CardBus = ({bus}) => {
   const [isHeart, setHeart] = useState(false);
@@ -31,7 +34,7 @@ function convertTypeBus(name) {
   return (
     <View className="bus-card">
       <View className="bus-card__header">
-        <Text className="time">{`${bus.departure_time} ${bus.departure_date}`}</Text>
+        <Text className="time">{`${bus.departure_time} ${bus.departure_date.replace(/-/g, "/")}`}</Text>
         <Text className="duration">{`${timeDiff(bus.departure_time, bus.drop_off_time)}`}</Text>
       </View>
 
@@ -42,7 +45,7 @@ function convertTypeBus(name) {
           <View className="dashed-line left-line" />
 
           <View className="arrow-button">
-            →
+              <Image src={arrow_route} className='route-img'/>
           </View>
 
           <View className="dashed-line right-line" />
@@ -61,7 +64,8 @@ function convertTypeBus(name) {
           </View>
           <View className='vertical'>
             <View className='horizontal'>
-              <Text className="rating">{`⭐ ${bus.transport_information.rating}`}</Text>
+              <Image src={star} className='fav_icon'/>
+              <Text className="rating">{`${bus.transport_information.rating}`}</Text>
               {/* <Button className='favourite-btn' onClick={() => setHeart(!isHeart)}> */}
                 {!isHeart ? (<Image src={ic_heart} alt="heart" onClick={() => setHeart(!isHeart)}/>)
                 : (<Image src={ic_heart_selected} alt="heart" onClick={() => setHeart(!isHeart)}/>)
@@ -74,9 +78,9 @@ function convertTypeBus(name) {
       </View>
 
       <View className='bus-card__line-container'>
-         <View class="semi-circle left"></View>
+         <View class="semi-circle cirle-left"></View>
          <View className="bus-card__line"></View>
-         <View class="semi-circle right"></View>
+         <View class="semi-circle cirle-right"></View>
       </View>
      
 

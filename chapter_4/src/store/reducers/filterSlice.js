@@ -2,12 +2,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from '@reduxjs/toolkit';
 
-const initialState = {
+const savedFilterState = JSON.parse(sessionStorage.getItem('filterState'));
+console.log(savedFilterState)
+const defaultFilterState = {
   selectedTimes: [],
   priceRange: [0, 3000000],
-  selectedOperators: [], // danh sách id nhà xe đã chọn
+  selectedOperators: [],
   selectedTypeBus: [],
 };
+const initialState = savedFilterState || defaultFilterState;
 
 export const selectFilteredBusList = createSelector(
   [(state) => state.trip.busList, (state) => state.filter],
@@ -70,7 +73,7 @@ const filterSlice = createSlice({
         state.selectedTypeBus.push(type);
       }
     },
-    resetFilter: () => initialState
+    resetFilter: () => defaultFilterState
   }
 });
 

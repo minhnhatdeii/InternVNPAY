@@ -7,15 +7,19 @@ import { Navigator } from "@vnxjs/components";
 import { setBusList,resetBusList } from "../../store/reducers/tripsSlice";
 import { setFilter } from "../../store/reducers/dateSortSlice";
 import { View, Button } from "@vnxjs/components";
+import { dateList } from "../../pages/SelectTrip/SelectTripDisplay/SelectTripDisplay";
 
 const SelectFilter = () => {
   const dispatch = useDispatch();
   const filteredList = useSelector(selectFilteredBusList);
   const count = filteredList.length;
+  const selectedIndex = useSelector(state => state.dateSort.selectedIndex);
+  
 
   const onClear = () => {
+    const dateStr = dateList[selectedIndex].date;
     dispatch(resetFilter());
-    dispatch(resetBusList());
+    dispatch(resetBusList({ dateStr, year: '2024' }));
     dispatch(setFilter(false));
    
   };

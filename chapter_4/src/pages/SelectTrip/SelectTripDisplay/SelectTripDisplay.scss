@@ -1,20 +1,27 @@
 .trip-display-container {
     height: 100%;
     background-color: #E3E1E3;
-    overflow: hidden;
     max-height: 100%;
 }
 .list-trip-display {
-    flex: 1;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
-    padding-top: 16px;
+    height: 100vh;
+    padding-top: 20px;
     gap: 16px;
     min-height: 0;
-    max-height: 1040px;
     padding-bottom: 50px;
-    background-color: #E3E1E3;
+    background-color: #F3F0F3;
+    position: relative;
+}
+.top-shadow {
+  position:absolute;
+  height: 25px;
+  width: 100%;
+  z-index: 11;
+  margin-top: 0px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent);
+  pointer-events: none; // để không cản scroll hoặc click
 }

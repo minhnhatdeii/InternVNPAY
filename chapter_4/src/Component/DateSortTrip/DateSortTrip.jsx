@@ -4,7 +4,7 @@ import ic_sort_grey from '../../assets/images/ic_filter_grey.svg';
 import ic_arrow_up from '../../assets/images/arrow-up.png';
 import ic_arrow_down from '../../assets/images/arrow-down.png'
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelectedIndex, setSortType } from '../../store/reducers/dateSortSlice';
+import { setSelectedIndex, setSortType, setIndexSortType } from '../../store/reducers/dateSortSlice';
 import { Button, Navigator, View, Image, Text, CoverView } from '@vnxjs/components';
 import { setFilter } from "../../store/reducers/dateSortSlice";
 
@@ -23,16 +23,17 @@ export default function DateSortTrip({dateList, sortTypes}) {
     dispatch(setSortType(index));
   };
   return (
+  <View>
     <View className="container">
       <View className="date-scroll">
         {dateList.map((item, index) => (
           <View
             key={index}
             className={`day ${index === selectedIndex ? 'selected' : ''}`}
-            onClick={() => {dispatch(setSelectedIndex(index)); dispatch(setFilter(false))}}
+            onClick={() => {dispatch(setSelectedIndex(index)); dispatch(setFilter(false)); dispatch(setIndexSortType())}}
           >
-            <View className="label">{item.label}</View>
-            <View className="date">{item.date}</View>
+            <View className={`label ${index === selectedIndex ? 'selected' : ''}`}>{item.label}</View>
+            <View className={`date ${index === selectedIndex ? 'selected' : ''}`}>{item.date}</View>
           </View>
         ))}
       </View>
@@ -70,5 +71,6 @@ export default function DateSortTrip({dateList, sortTypes}) {
         </Navigator>
       </View>
     </View>
+  </View>
   );
 }

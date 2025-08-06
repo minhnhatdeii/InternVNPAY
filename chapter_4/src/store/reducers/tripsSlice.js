@@ -66,8 +66,8 @@ function sortTrips(trips, typeIndex, isAscending) {
 
   return sorted;
 }
-
-const initialState = {
+const savedTripState = JSON.parse(sessionStorage.getItem('tripState'));
+const initialState = savedTripState || {
   busList: [],
   operatorList: [],
   typeBusList: [],
@@ -95,18 +95,25 @@ const tripsSlice = createSlice({
         const clonedList = [...listBus];
         const filtered = filterTripsByDate(clonedList, dateStr, year);
         const sorted = sortTrips(filtered, 0, true);
-        state.busList = sorted; // lọc trực tiếp từ busList hiện tại
+        state.busList = sorted;
+        state.loading = false;
+        
     },
     sortTripsByTypeAction(state, action) {
         const { typeIndex, isAsc } = action.payload;
         const sorted = sortTrips(state.busList, typeIndex, isAsc);
         state.busList = sorted;
+        state.loading = false;
     },
     setBusList(state, action) { // set busList
       state.busList = action.payload;
     },
-    resetBusList(state) {
-        state.busList = [...listBus]; // clone lại từ dữ liệu gốc
+    resetBusList(state, action) {
+        const { dateStr, year } = action.payload;
+        const clonedList = [...listBus];
+        const filtered = filterTripsByDate(clonedList, dateStr, year);
+        const sorted = sortTrips(filtered, 0, true);
+        state.busList = sorted;
     }
   },
 });

@@ -26,28 +26,29 @@
 
 .trip-title {
   font-weight: bold;
-  font-size: 25px;
+  font-size: 28px;
 }
 
 .trip-route {
-  font-size: 25px;
+  font-size: 28px;
   color: black;
 }
 
 .icon-button {
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 25px;
   padding: 6px;
   cursor: pointer;
   align-items: center;
   color: white;
+  font-weight: bolder;
 }
 .icon-button::after {
   display: none !important;
 }
 .btn-tripheader_line {
-  border-left: 1px solid #fff;
+  border-left: 1px solid #e8dada;
   margin: 0px 10px;
   padding: 10px 0px;
 }
@@ -66,4 +67,5 @@
   height: 80%;
   line-height: 20px;
   color: white;
+  margin-right: 10px;
 }

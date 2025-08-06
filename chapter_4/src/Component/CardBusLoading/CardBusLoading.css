@@ -1,78 +1,113 @@
-.vertical {
+.vertical2 {
   display: flex;
   flex-direction: column;
+  margin-left: auto;
+  height: 100%;
+  width: 150px;
 }
-.horizontal {
+.horizontal2 {
   display: flex;         
   justify-content: center;    
   align-items: center;                     
 }
+.skeleton-line {
+  height: 20px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
 
-.bus-card {
-  background: #fff;
+.skeleton-line.short {
+  width: 50%;
+}
+
+.skeleton-line.long {
+  width: 75%;
+}
+.skeleton-line.sshort {
+  width: 25%;
+}
+.skeleton-line.ssshort {
+  width: 10%;
+}
+
+.skeleton-line.slong {
+  width: 90%;
+}
+.skeleton-line.width3 {
+  width: 30px;
+}
+.skeleton-line.max {
+  width: 100%;
+}
+.skeleton-line.height5 {
+    height: 50px;
+}
+.skeleton-box,
+.skeleton-circle,
+.skeleton-button {
+  background: #e0e0e0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.skeleton-box {
+    width: 80px;
+    height: 40px;
+}
+.skeleton-button {
+    width: 120px;
+    height: 50px;
+}
+.skeleton-circle {
+  border-radius: 50%;
+}
+/* Shimmer animation */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150px;
+  height: 100%;
+  width: 150px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.bus-card2 {
+  background: white;
   border-radius: 12px;
   padding: 16px;
   width: 90%;
-  font-family: Arial, sans-serif;
 }
 
 .bus-card__header {
   display: flex;
   justify-content: space-between;
-  font-size: 23px;
-  color: #878383;
   margin-bottom: 8px;
-  font-weight: 500;
 }
 
 .bus-card__route {
   background: #fcfcfc;
   border-radius: 8px;
-  padding: 5px 10px;
+  padding: 20px;
   text-align: center;
-  font-weight: bold;
-  font-size: 23px;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.arrow-line-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  flex: 1;
-  margin-right: 10px;
-  margin-left: 10px;
-}
-
-.dashed-line{
-  flex: 1;
-  height: 0;
-}
-.left-line {
-  border-top: 5px dotted #f0e7e7;
-  font-weight: 100;
-}
-.right-line {
-  border-top: 5px dotted #0d47a1;
-}
-
-.arrow-button {
-  position: relative;
-  background-color: #0d47a1;
-  padding: 2px 4px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 30px;
-  min-height: 30px;
-  margin: 0px 5px;
-}
 .route-img{
   max-height: 32px;
   padding-bottom: 10px;
@@ -135,7 +170,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
 }
 
 .bus-card__image {
@@ -155,9 +189,6 @@
   align-items: center;
 }
 
-.brand {
-  font-size: 25px;
-}
 
 .rating {
   color: rgb(0, 0, 0);
@@ -206,14 +237,17 @@
 }
 
 .price {
-  font-size: 25px;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
+.price2 {
+  display: flex;
+  flex-direction: column;
+}
 
 .seats-left {
-  font-size: 25px;
+  font-size: 23x;
   color: black;
 }
 
